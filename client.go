@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"mime/multipart"
 	"net/http"
 	"os"
@@ -72,7 +71,7 @@ func (c *Client) DoTimeout(req *Request, timeout time.Duration) (Response, error
 		return resp, err
 	}
 	defer httpResp.Body.Close()
-	body, err = ioutil.ReadAll(httpResp.Body)
+	body, err = io.ReadAll(httpResp.Body)
 	if err != nil {
 		return resp, err
 	}
@@ -124,7 +123,7 @@ func (c *Client) Upload(file string, duration time.Duration) (UploadResponse, er
 		return resp, err
 	}
 	defer httpResp.Body.Close()
-	data, err := ioutil.ReadAll(httpResp.Body)
+	data, err := io.ReadAll(httpResp.Body)
 	if err != nil {
 		return resp, err
 	}
